@@ -2,6 +2,26 @@
 
 Urban Airship SDK for Android.
 
+## Onefootball Specific Part
+
+Sender ID check has been modified in `GcmPushProvider` class in order to support multiple 
+sender IDs separated for the UrbanAirship setup (i.e.: `524564225791,650573504455,136643775234`)
+
+To build and publish the new version do the following:  
+- Rebase this GitHub fork on top the latest changes done by Urban Airship
+- Update the version in `airship.properties` file by adding the `-OF` suffix to it
+- Create `maven.properties` file and setup the Nexus server url and credentials (the 
+  file MUST NOT be committed into Git)
+- Run `gradlew urbanairship-sdk:publish`
+
+Sample `maven.properties` file:
+
+```
+mavenPublishingUrl = https://ci.somewhere.com/nexus/content/repositories/reponame/
+mavenPublishingUsername = deployer_username
+mavenPublishingPassword = deployer_password
+```
+
 ## Resources
 
 - [Getting started guide](http://docs.urbanairship.com/platform/android/)

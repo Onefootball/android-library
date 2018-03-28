@@ -82,6 +82,11 @@ android.libraryVariants.all { variant ->
             addStringOption "templatedir", "docs/template"
         }
     }
+
+    task("javadoc${variant.name.capitalize()}Jar", type: Jar, dependsOn: "javadoc${variant.name.capitalize()}") {
+        classifier = 'javadoc'
+        from tasks.getByName("javadoc${variant.name.capitalize()}").destinationDir
+    }
 }
 
 install {
@@ -194,3 +199,10 @@ project.afterEvaluate {
     runDexMethodCount.dependsOn(assembleRelease)
     bintrayUpload.dependsOn(assembleRelease)
 }
+
+ext {
+    mavenProperties = new Properties()
+    mavenProperties.load(rootProject.file("maven.properties").newReader())
+}
+
+apply from: 'maven-publishing.gradle'
