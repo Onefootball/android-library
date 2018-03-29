@@ -96,7 +96,7 @@ public class GcmPushProvider implements PushProvider {
         String sender = message.getExtra("from", null);
         boolean isValidSender = false;
         if (sender != null) {
-            isValidSender = sender.equals(UAirship.shared().getAirshipConfigOptions().getFcmSenderId());
+            isValidSender = UAirship.shared().getAirshipConfigOptions().getFcmSenderId().contains(sender);
         }
 
         return isValidSender && message.containsAirshipKeys();
